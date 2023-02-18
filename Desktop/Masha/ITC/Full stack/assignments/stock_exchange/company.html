@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+    <title>Company Profile</title>
+  </head>
+  <body>
+    <div class="canvasProfile">
+      <div class="containerImageName">
+        <img id="imageCompany" class="imgProfile" src="" />
+        <div id="companyName" class="nameProfile"></div>
+      </div>
+      <div class="containerPricePerc">
+        <div id="stockPrice" class="priceProfile"></div>
+        <div id="percentages" class="precentagesChange"></div>
+      </div>
+      <div id="descriptionCompany" class="descriptionProfile"></div>
+      <div class="chartCard">
+        <div class="chartBox">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"
+    ></script>
+    <script src="/JavaScript/company.js"></script>
+  </body>
+</html>
