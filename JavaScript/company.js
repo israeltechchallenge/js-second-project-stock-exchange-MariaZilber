@@ -4,11 +4,8 @@ console.log(symbol);
 
 async function profileCompany() {
   try {
-    const response = await fetch(
-      `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/${symbol}`
-    );
+    const response = await fetch(baseUrl + `/api/v3/company/profile/${symbol}`);
     const data = await response.json();
-    console.log(data);
     getData(data);
   } catch (err) {
     console.log(err);
@@ -23,21 +20,36 @@ function getData(data) {
   document.getElementById("descriptionCompany").innerHTML = description;
   document.getElementById("stockPrice").innerHTML =
     "Stock Price: " + "$" + price;
-
+    
   if (changesPercentage < 0) {
     document.getElementById("percentages").innerHTML =
       "(" + parseFloat(`${changesPercentage}`).toFixed(2) + "%)";
-    document.getElementById("percentages").classList.add("red");
+    document.getElementById("percentages").classList.add("color_red");
   } else {
     document.getElementById("percentages").innerHTML =
       "(+" + parseFloat(`${changesPercentage}`).toFixed(2) + "%)";
-    document.getElementById("percentages").classList.add("green");
+    document.getElementById("percentages").classList.add("color_green");
   }
 }
 profileCompany();
 
 let historyDate = [];
 let historyStockPrice = [];
+
+async function getApi() {
+  try {
+    const link = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/historical-price-full/${symbol}?serietype=line`;
+    const responseLink = await fetch(link);
+    const dataJson = await responseLink.json();
+
+    const date = dataJson.historical.map((day) => day.date);
+    historyDate = date;
+    const close = dataJson.historical.map((price) => price.close);
+    historyStockPrice = close;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 async function displayData() {
   await getApi();
@@ -68,22 +80,6 @@ async function displayData() {
   };
 
   new Chart(document.getElementById("myChart"), config);
-}
-
-async function getApi() {
-  try {
-    const link = `https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/historical-price-full/${symbol}?serietype=line`;
-    const responseLink = await fetch(link);
-    const dataJson = await responseLink.json();
-    console.log(dataJson.historical);
-
-    const date = dataJson.historical.map((day) => day.date);
-    historyDate = date;
-    const close = dataJson.historical.map((price) => price.close);
-    historyStockPrice = close;
-  } catch (err) {
-    console.log(err);
-  }
 }
 
 displayData();
