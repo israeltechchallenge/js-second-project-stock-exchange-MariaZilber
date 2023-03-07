@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon/favicon-32x32.png"
+    />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Stock Exchange</title>
+  </head>
+  <body>
+    <div class="marqueeContainer">
+      <div class="marqueeList"></div>
+    </div>
+    <div class="canvas">
+      <div class="container">
+        <h2>Search Nasdaq Stocks</h2>
+        <div class="searchContainer">
+          <input
+            type="text"
+            placeholder="Search for company stock symbol"
+            class="inputUser"
+            id="inputUser"
+          />
+          <button
+            onclick="makeSearch()"
+            type="button"
+            id="searchResults"
+            class="btnResults"
+          >
+            search
+          </button>
+        </div>
+        <div class="loaderSearch d-none" id="loadingSpinner"></div>
+        <div class="results">
+          <ul id="resultsList" class="resultsList"></ul>
+        </div>
+      </div>
+    </div>
+    <script src="./JavaScript/baseUrl.js"></script>
+    <script src="./JavaScript/marquee.js"></script>
+    <script src="./JavaScript/stock.js"></script>
+    <script src="./JavaScript/company.js"></script>
+    <script>
+      new Marquee(document.querySelector(".marqueeList"));
+      const makeSearch = () => {
+        new SearchResult(document.getElementById("inputUser"));
+      };
+    </script>
+  </body>
+</html>
